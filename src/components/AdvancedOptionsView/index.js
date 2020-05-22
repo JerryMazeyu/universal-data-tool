@@ -6,6 +6,8 @@ import { styled } from "@material-ui/core/styles"
 import usePosthog from "../../utils/use-posthog"
 import { useAppConfig } from "../AppConfig"
 
+import { useTranslation } from 'react-i18next';
+
 const Button = styled(MuiButton)({
   margin: 8,
 })
@@ -15,10 +17,13 @@ export const AdvancedOptionsView = ({ onClickEditJSON, onClearLabelData }) => {
   const posthog = usePosthog()
   const { fromConfig, setInConfig } = useAppConfig()
 
+  // internalization hook
+  const { t, i18n } = useTranslation()
+
   return (
     <Box padding={2}>
       <Button onClick={onClickEditJSON} variant="outlined">
-        Edit JSON
+        {t("added-json")}
       </Button>
       <Button
         onClick={() => {
@@ -32,7 +37,7 @@ export const AdvancedOptionsView = ({ onClickEditJSON, onClearLabelData }) => {
         }}
         variant="outlined"
       >
-        Clear All Labels
+        {t("clear-labels")}
       </Button>
       <Button
         variant="outlined"
@@ -45,7 +50,7 @@ export const AdvancedOptionsView = ({ onClickEditJSON, onClearLabelData }) => {
           forceUpdate()
         }}
       >
-        {posthog.has_opted_out_capturing() ? "Enable" : "Disable"} Telemetry
+        {posthog.has_opted_out_capturing() ? "Enable" : "Disable"} {t("telemetry")}
       </Button>
       <Button
         variant="outlined"
@@ -60,7 +65,7 @@ export const AdvancedOptionsView = ({ onClickEditJSON, onClearLabelData }) => {
           window.location.reload()
         }}
       >
-        Custom Collaboration Server
+        {t("custom-collobration-server")}
       </Button>
       <Button
         variant="outlined"
@@ -71,7 +76,7 @@ export const AdvancedOptionsView = ({ onClickEditJSON, onClearLabelData }) => {
           )
         }}
       >
-        {fromConfig("labelhelp.disabled") ? "Enable" : "Disable"} Label Help
+        {fromConfig("labelhelp.disabled") ? "Enable" : "Disable"} {t("label-help")}
       </Button>
       {!fromConfig("labelhelp.disabled") && (
         <Button
@@ -86,7 +91,7 @@ export const AdvancedOptionsView = ({ onClickEditJSON, onClearLabelData }) => {
             setInConfig("labelhelp.apikey", response)
           }}
         >
-          Label Help API Key
+          {t("label-help-api-key")}
         </Button>
       )}
     </Box>

@@ -9,6 +9,8 @@ import {
 import { makeStyles } from "@material-ui/core/styles"
 import isEmpty from "lodash/isEmpty"
 
+import { useTranslation } from 'react-i18next';
+
 import Amplify, { Auth } from "aws-amplify"
 
 const useStyles = makeStyles((theme) => ({
@@ -31,6 +33,9 @@ export default ({
     Amplify.configure(authConfig)
   } catch (e) {}
   const classes = useStyles()
+
+  const { t, i18n } = useTranslation()
+
 
   const [state, setState] = useState({
     email: "",
@@ -101,7 +106,7 @@ export default ({
   return (
     <Fragment>
       <Typography component="h1" variant="h5">
-        Sign in
+        {t("sign-in")}
       </Typography>
       <form className={classes.form} noValidate>
         <TextField
@@ -146,7 +151,7 @@ export default ({
           color="primary"
           className={classes.submit}
         >
-          Sign In
+          {t("sign-in")}
         </Button>
       </form>
     </Fragment>

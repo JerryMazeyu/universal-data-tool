@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react"
 import { Typography, TextField, Button } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import Amplify, { Auth } from "aws-amplify"
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -151,10 +152,13 @@ export default ({
       })
   }
 
+  const { t, i18n } = useTranslation()
+
+
   return (
     <Fragment>
       <Typography component="h1" variant="h5">
-        Complete your Sign Up
+        {t("complete-your-sign-up")}
       </Typography>
       <form className={classes.form} noValidate>
         <TextField
@@ -228,7 +232,7 @@ export default ({
           color="primary"
           className={classes.submit}
         >
-          Complete Sign Up
+          {t("complete-sign-up")}
         </Button>
       </form>
     </Fragment>
